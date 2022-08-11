@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
@@ -9,11 +8,11 @@ export default function Cadastro() {
         <Article>
             <Form>
                 <Input type='text' placeholder="Nome" required />
-                <Input type='text' placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato XXX.XXX.XXX-XX" required />
+                <Input type='text' placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato (XXX.XXX.XXX-XX), respeitando uso de pontos e traço" required />
                 <Input type='email' placeholder="Email" required />
                 <Input type='password' placeholder="Senha" required />
 
-                <Button><p>CADASTRAR</p></Button>
+                <Button onClick={() => navigate('/')}><p>CADASTRAR</p></Button>
                 <Account onClick={() => navigate('/')}>Já possuí conta? Entre </Account>
             </Form>
         </Article>
@@ -22,12 +21,11 @@ export default function Cadastro() {
 }
 
 const Article = styled.div`
-    width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    height: 100vh;
+    width: 100vw;
 `
 
 const Form = styled.form`
@@ -37,10 +35,7 @@ const Form = styled.form`
 `
 
 const Input = styled.input`
-    font-family: 'Roboto';
-    border-radius: 8px;
     height: 52px;
-    padding-left: 10px;
     margin: 10px 0 10px 0;
 `
 

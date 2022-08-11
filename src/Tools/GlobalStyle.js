@@ -2,9 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
 
-    *{
-        font-family: 'Roboto', sans-serif;
-
+    *:root{
+        font-family: 'Roboto', sans-serif
     }
 
     button {
@@ -16,13 +15,18 @@ export default createGlobalStyle`
     background: transparent;
     color: inherit;
     font: inherit;
-    font-family: 'Roboto', sans-serif;
-}
+    font-weight: 700;
+    height: 52px;
+    background: #FF4791;
+    border-radius: 8px;
+    }
 
     input {
         box-shadow: none;
         border: transparent;
-        font-family: 'Roboto', sans-serif;
+        border-radius: 8px;
+        height: 52px;
+        padding-left: 10px;
     }
 
     body{
@@ -30,7 +34,8 @@ export default createGlobalStyle`
         color: white;
     }
 
-    h1, p, h2, h3, h4{
-        font-family: 'Roboto', sans-serif;
+    img{
+        width: 100%;
+        height: 100%;
     }
 `

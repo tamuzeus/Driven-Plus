@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import DrivenTittle from "../Tools/Images/DrivenTittle.png";
 
-// import { useState } from "react";
 import {useNavigate } from "react-router-dom";
 
 export default function Login () {
@@ -11,14 +10,14 @@ export default function Login () {
         <Article>
 
             <ImageArea>
-                <Img src={DrivenTittle}/>
+                <img src={DrivenTittle} alt=''/>
             </ImageArea>
 
             <Form>
                 <Input type='email' placeholder="Email" required />
                 <Input type='password' placeholder="Senha" required />
 
-                <Button><p>ENTRAR</p></Button>
+                <Button onClick={() => navigate('/subscriptions')}><p>ENTRAR</p></Button>
                 <Account onClick={() => navigate('/sign-up')}>Não possuí uma conta? Cadastre-se</Account>
             </Form>
         </Article>
@@ -27,23 +26,18 @@ export default function Login () {
 }
 
 const Article = styled.div`
-    width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100vw;
 `
 
 const ImageArea = styled.div`
     height: 60px;
     width: 80vw;
     margin-bottom: 100px;
-`
-
-const Img = styled.img `
-    width: 100%;
-    height: 100%;
 `
 
 const Form = styled.form`
@@ -53,9 +47,6 @@ const Form = styled.form`
 `
 
 const Input = styled.input`
-    font-family: 'Roboto';
-    border-radius: 8px;
-    height: 52px;
     padding-left: 10px;
     margin: 10px 0 10px 0;
 `
@@ -63,10 +54,6 @@ const Input = styled.input`
 const Button = styled.button `
     margin-top: 10px;
     margin-bottom: 24px;
-    font-weight: 700;
-    height: 52px;
-    background: #FF4791;
-    border-radius: 8px;
 `
 
 const Account = styled.p `
