@@ -8,12 +8,13 @@ import Modal from "../Component/Modal";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import UserContext from "../Component/Context";
 
 
 export default function ConfirmSub () {
     const navigate = useNavigate()
-    const [openModal, setOpenModal] = useState(false)
+    const {openModal, setOpenModal} = useContext(UserContext);
 
     return (
         <Article>
@@ -98,6 +99,11 @@ const Tittle = styled.h1 `
 
 const Body = styled.div `
     width: 80vw;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
 `
 
 const Superior = styled.div `
@@ -139,9 +145,7 @@ const Form = styled.form `
     gap: 8px;
 `
 
-const Input = styled.input `
-
-`
+const Input = styled.input ``
 
 const Inferiorform = styled.div `
     display: flex;

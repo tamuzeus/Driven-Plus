@@ -2,8 +2,12 @@ import Close from "../Tools/Images/Close.png";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../Component/Context";
 
 export default function Modal() {
+    const {openModal, setOpenModal} = useContext(UserContext);
+
 
     const navigate = useNavigate()
 
@@ -13,14 +17,14 @@ export default function Modal() {
 
             <Fullbody>
                 <Iconbody>
-                    <img src={Close} />
+                    <img src={Close} alt='' onClick={() => {setOpenModal(!openModal)}}/>
                 </Iconbody>
 
                 <Modalbody>
 
                     <Modaltext><p>Tem certeza que deseja assinar o plano <span>Driven Plus (R$ 39,99)</span>?</p></Modaltext>
                     <Modalbuttons>
-                        <Buttonw><p>Não</p></Buttonw>
+                        <Buttonw onClick={() => {setOpenModal(!openModal)}}><p>Não</p></Buttonw>
                         <Buttonp onClick={() => navigate('/home')}><p>SIM</p></Buttonp>
                     </Modalbuttons>
 

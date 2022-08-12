@@ -38,6 +38,7 @@ const ImageArea = styled.div`
     height: 60px;
     width: 80vw;
     margin-bottom: 100px;
+    max-width: 500px;
 `
 
 const Form = styled.form`

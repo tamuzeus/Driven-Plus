@@ -10,15 +10,17 @@ import Subscriptions from "./Pages/Subscriptions";
 import ConfirmSub from "./Pages/ConfirmSub";
 import Home from "./Pages/Home";
 import UserContext from "./Component/Context"
+import { useState } from "react";
 
 function App() {
 
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <BrowserRouter>
             <Reset />
             <GlobalStyle />
-            <UserContext.Provider>
+            <UserContext.Provider value={{openModal, setOpenModal}}>
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/sign-up" element={<Cadastro />} />
