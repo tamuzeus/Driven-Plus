@@ -14,13 +14,18 @@ import { useState } from "react";
 
 function App() {
 
+    const [name, setName] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [openModal, setOpenModal] = useState(false)
+    const [bearertoken, setBearerToken] = useState('')
 
     return (
         <BrowserRouter>
             <Reset />
             <GlobalStyle />
-            <UserContext.Provider value={{openModal, setOpenModal}}>
+            <UserContext.Provider value={{ openModal, setOpenModal, name, setName, cpf, setCpf, email, setEmail, password, setPassword, bearertoken, setBearerToken }}>
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/sign-up" element={<Cadastro />} />
