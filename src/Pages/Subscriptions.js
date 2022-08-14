@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../Component/Context";
 
-function PlansComponent({ src, price, key }) {
+function PlansComponent({ src, price, id }) {
 
     return (
         <PlanBody>
-            <LogoBody><img src={src} value={key} alt=''/></LogoBody>
+            <LogoBody><img src={src} value={id} alt=''/></LogoBody>
             <Price>{price}</Price>
         </PlanBody>
     )
@@ -19,16 +19,15 @@ export default function Subscriptions() {
     const [Array, setArray] = useState([])
 
     useEffect(() => {
+        if(!bearertoken){return}
         const promise = getPlans(bearertoken)
         promise.catch(res => {
             console.log('error')
         })
         promise.then(res => {
-            console.log('Ok!')
-            console.log(res.data)
             setArray(res.data)
         })
-    }, [])
+    }, [bearertoken])
 
     return (
         <Article>
@@ -36,6 +35,7 @@ export default function Subscriptions() {
 
             {Array.map((value) => <PlansComponent
                 key={value.id}
+                id={value.id}
                 src={value.image}
                 price={value.price}
             />)}
