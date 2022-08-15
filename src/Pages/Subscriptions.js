@@ -2,12 +2,18 @@ import { getPlans } from "../Tools/DrivenPlus";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../Component/Context";
+import { useNavigate} from "react-router-dom";
 
 function PlansComponent({ src, price, id }) {
+    const navigate = useNavigate()
+    const {setValue} = useContext(UserContext);
 
     return (
-        <PlanBody>
-            <LogoBody><img src={src} value={id} alt=''/></LogoBody>
+        <PlanBody value={id} onClick={() => {
+            navigate(`/subscriptions/${id}`)
+            setValue(id)
+        }}>
+            <LogoBody><img src={src} alt=''/></LogoBody>
             <Price>{price}</Price>
         </PlanBody>
     )
