@@ -22,9 +22,6 @@ export default function Login() {
             alert('Email em uso ou senha inválidos!')
         })
         promise.then(res => {
-            alert('Ok!')
-            navigate('/Subscriptions')
-
             const token = res.data.token
             const HeaderToken = {
                 headers: {
@@ -32,6 +29,8 @@ export default function Login() {
                 }
             }
             setBearerToken(HeaderToken)
+
+            navigate('/Subscriptions')
         })
 
     }
