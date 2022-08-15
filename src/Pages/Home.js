@@ -10,6 +10,12 @@ export default function Home() {
     const navigate = useNavigate()
     const perks = homeinfo.membership.perks
 
+    function delelePLan (){
+        const promise = postDelete(bearertoken);
+        promise.catch(res => {console.log('error')})
+        promise.then(res => {navigate('/Subscriptions/')})
+    }
+
     return (
         <Article>
             <Header>
@@ -29,7 +35,7 @@ export default function Home() {
 
             <Footer>
                 <Button onClick={() => navigate('/Subscriptions/')}><p>Mudar plano</p></Button>
-                <Buttonr onClick={() => { postDelete(bearertoken); navigate('/Subscriptions/') }}><p>Cancelar plano</p></Buttonr>
+                <Buttonr onClick={() => { delelePLan()}}><p>Cancelar plano</p></Buttonr>
             </Footer>
 
         </Article>

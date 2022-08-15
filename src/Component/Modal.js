@@ -12,7 +12,7 @@ export default function Modal() {
     function subConfirm(){
         const promise = postSubsorChange(confirm, bearertoken)
         promise.catch(res => {
-            console.log('Error')
+            alert('Houve na sua tentativa de assinatura, tente novamente!')
         })
         promise.then(res => {
             setHomeinfo(res.data)
