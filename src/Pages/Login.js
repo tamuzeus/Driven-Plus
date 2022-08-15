@@ -8,7 +8,7 @@ import UserContext from "../Component/Context";
 
 export default function Login() {
     const navigate = useNavigate()
-    const { email, setEmail, password, setPassword, setBearerToken } = useContext(UserContext);
+    const { email, setEmail, password, setPassword, setBearerToken, setUserinf } = useContext(UserContext);
 
     function HandleForm(e) {
         e.preventDefault()
@@ -29,7 +29,7 @@ export default function Login() {
                 }
             }
             setBearerToken(HeaderToken)
-
+            setUserinf(res.data.name)
             navigate('/Subscriptions')
         })
 

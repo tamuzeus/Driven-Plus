@@ -1,16 +1,20 @@
-import Group1 from "../Tools/Images/Group1.png";
-// import Group2 from "../Tools/Images/Group2.png";
-// import Group3 from "../Tools/Images/Group3.png";
 import User from "../Tools/Images/User.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { postDelete } from "../Tools/DrivenPlus";
+import { useContext } from "react";
+import UserContext from "../Component/Context";
 
 export default function Home() {
+    const { bearertoken, homeinfo, userinf} = useContext(UserContext);
+    const navigate = useNavigate()
+    const perks = homeinfo.membership.perks
 
     return (
         <Article>
             <Header>
                 <IconBody>
-                    <img src={Group1} alt=''></img>
+                    <img src={homeinfo.membership.image} alt=''></img>
                 </IconBody>
 
                 <UserIconBody>
@@ -19,23 +23,24 @@ export default function Home() {
             </Header>
 
             <Body>
-                <Tittle>Olá, <span>Fulano</span></Tittle>
-                <Button><p>Solicitar brindes</p></Button>
-                <Button><p>Materiais bônus de web</p></Button>
-
-                <Button><p>Aulas bônus de tech</p></Button>
-                <Button><p>Mentorias personalizadas</p></Button>
+                <Tittle>Olá, <span>{userinf}</span></Tittle>
+                {perks.map((value, index) => <Button key={index}><Link href={value.link}>{value.title}</Link></Button>)}
             </Body>
 
             <Footer>
-                <Button><p>Mudar plano</p></Button>
-                <Buttonr><p>Cancelar plano</p></Buttonr>
+                <Button onClick={() => navigate('/Subscriptions/')}><p>Mudar plano</p></Button>
+                <Buttonr onClick={() => { postDelete(bearertoken); navigate('/Subscriptions/') }}><p>Cancelar plano</p></Buttonr>
             </Footer>
 
         </Article>
     )
 
 }
+
+const Link = styled.a`
+    color: white;
+    text-decoration: none; 
+`
 
 const Article = styled.article`
     width: 100vw;

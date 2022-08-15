@@ -4,10 +4,21 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../Component/Context";
+import { postSubsorChange } from "../Tools/DrivenPlus";
 
 export default function Modal() {
-    const {openModal, setOpenModal} = useContext(UserContext);
+    const {openModal, setOpenModal, info, confirm, bearertoken, setHomeinfo } = useContext(UserContext);
 
+    function subConfirm(){
+        const promise = postSubsorChange(confirm, bearertoken)
+        promise.catch(res => {
+            console.log('Error')
+        })
+        promise.then(res => {
+            setHomeinfo(res.data)
+            navigate('/home')
+        })
+    }
 
     const navigate = useNavigate()
 
@@ -22,10 +33,10 @@ export default function Modal() {
 
                 <Modalbody>
 
-                    <Modaltext><p>Tem certeza que deseja assinar o plano <span>Driven Plus (R$ 39,99)</span>?</p></Modaltext>
+                    <Modaltext><p>Tem certeza que deseja assinar o plano <span>{info.name} {info.price}</span>?</p></Modaltext>
                     <Modalbuttons>
                         <Buttonw onClick={() => {setOpenModal(!openModal)}}><p>Não</p></Buttonw>
-                        <Buttonp onClick={() => navigate('/home')}><p>SIM</p></Buttonp>
+                        <Buttonp onClick={() => {subConfirm(); setOpenModal(!openModal)}}><p>SIM</p></Buttonp>
                     </Modalbuttons>
 
                 </Modalbody>
@@ -86,11 +97,17 @@ const Modalbuttons = styled.div`
     display: flex;
 `
 
-const Buttonw = styled.button`
+const Buttonw = styled.div`
     background: #CECECE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 52px;
     width: 95px;
     margin: 0 7px 0 7px;
+    font-weight: 700;
+    height: 52px;
+    border-radius: 8px;
 `
 
 const Buttonp = styled.button`

@@ -35,8 +35,8 @@ export default function Registration () {
         <Article>
             <Form onSubmit={HandleForm}>
                 <Input type='text' onChange={(e) => setName(e.target.value)} value={name} placeholder="Nome" required />
-                <Input type='text' onChange={(e) => setCpf(e.target.value)} value={cpf} placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato (XXX.XXX.XXX-XX), respeitando uso de pontos e traço" required />
-                <Input type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" title="Digite o emaill respeitando o uso do @" required />
+                <Input type='text' onChange={(e) => setCpf(e.target.value)} value={cpf} placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato (XXX.XXX.XXX-XX), respeitando uso de pontos e traço, verifique se não possui espaços extras!" required />
+                <Input type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email" title="Digite o email respeitando o uso do @, verifique se não possui espaços extras!" required />
                 <Input type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Senha" required />
 
                 <Button><p>CADASTRAR</p></Button>
