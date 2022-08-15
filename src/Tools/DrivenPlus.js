@@ -23,11 +23,10 @@ function getPlan(id, token) {
     return promise;
 }
 
-function postSubsorChange(token) {
-    const promise = axios.post(`${BASE_URL}/subscriptions`, token);
+function postSubsorChange(infos, token) {
+    const promise = axios.post(`${BASE_URL}/subscriptions`, infos, token);
     return promise;
 }
-
 
 function postDelete(token) {
     const promise = axios.delete(`${BASE_URL}/subscriptions`, token);
