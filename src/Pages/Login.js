@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { postLogin } from "../Tools/DrivenPlus";
 import { useContext } from "react";
 import UserContext from "../Component/Context";
+import Home from "./Home";
 
 export default function Login() {
     const navigate = useNavigate()
     const { email, setEmail, password, setPassword, setBearerToken, setUserinf } = useContext(UserContext);
+
 
     function HandleForm(e) {
         e.preventDefault()
@@ -22,6 +24,10 @@ export default function Login() {
             alert('Email em uso ou senha inválidos!')
         })
         promise.then(res => {
+            const object = res.data
+            const seriliobject = JSON.stringify(object)
+            localStorage.setItem('user', seriliobject)
+
             const token = res.data.token
             const HeaderToken = {
                 headers: {
@@ -30,12 +36,19 @@ export default function Login() {
             }
             setBearerToken(HeaderToken)
             setUserinf(res.data.name)
+
             navigate('/Subscriptions')
         })
-
     }
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user.membership)
+    const confirmation = user.membership
 
-    return (
+    if (confirmation) {
+        return (
+            <Home />
+        )
+    } else {
         <Article>
 
             <ImageArea>
@@ -50,8 +63,7 @@ export default function Login() {
                 <Account onClick={() => navigate('/sign-up')}>Não possuí uma conta? Cadastre-se</Account>
             </Form>
         </Article>
-    )
-
+    }
 }
 
 const Article = styled.div`
