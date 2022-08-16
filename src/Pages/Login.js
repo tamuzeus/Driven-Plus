@@ -46,7 +46,7 @@ export default function Login() {
                 <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
 
                 <Button><p>ENTRAR</p></Button>
-                <Account onClick={() => navigate('/sign-up')}>Não possui uma conta? Cadastre-se</Account>
+                <Account onClick={() => navigate('/sign-up')}>Não possui uma conta? Cadastre-se!</Account>
             </Form>
         </Article>
     )

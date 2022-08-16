@@ -41,7 +41,7 @@ export default function Home() {
 
             <Footer>
                 <Button onClick={() => navigate('/Subscriptions/')}><p>Mudar plano</p></Button>
-                <Buttonr onClick={() => { delelePLan()}}><p>Cancelar plano</p></Buttonr>
+                <Buttonr onClick={() => { delelePLan()}}><p>cancelar plano</p></Buttonr>
             </Footer>
 
         </Article>
