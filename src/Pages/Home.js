@@ -6,9 +6,13 @@ import { useContext } from "react";
 import UserContext from "../Component/Context";
 
 export default function Home() {
-    const { bearertoken, homeinfo, userinf} = useContext(UserContext);
+    const { bearertoken, homeinfo} = useContext(UserContext);
     const navigate = useNavigate()
-    const perks = homeinfo.membership.perks
+
+    const user = JSON.parse(localStorage.getItem("user"))
+    const name = user.name || homeinfo.name 
+    const logoimg = user.membership.image || homeinfo.membership.image 
+    const perks = user.membership.perks || homeinfo.membership.perks
 
     function delelePLan (){
         const promise = postDelete(bearertoken);
@@ -20,7 +24,7 @@ export default function Home() {
         <Article>
             <Header>
                 <IconBody>
-                    <img src={homeinfo.membership.image} alt=''></img>
+                    <img src={logoimg} alt=''></img>
                 </IconBody>
 
                 <UserIconBody>
@@ -29,7 +33,7 @@ export default function Home() {
             </Header>
 
             <Body>
-                <Tittle>Olá, <span>{userinf}</span></Tittle>
+                <Tittle>Olá, <span>{name}</span></Tittle>
                 {perks.map((value, index) => <Button key={index}><Link href={value.link}>{value.title}</Link></Button>)}
             </Body>
 

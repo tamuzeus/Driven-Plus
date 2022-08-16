@@ -40,29 +40,30 @@ export default function Login() {
             navigate('/Subscriptions')
         })
     }
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user.membership)
-    const confirmation = user.membership
+    const user = JSON.parse(localStorage.getItem("user"))
+    const confirmation = user && user.membership
 
     if (confirmation) {
         return (
             <Home />
         )
     } else {
-        <Article>
+        return (
+            <Article>
 
-            <ImageArea>
-                <img src={DrivenTittle} alt='' />
-            </ImageArea>
+                <ImageArea>
+                    <img src={DrivenTittle} alt='' />
+                </ImageArea>
 
-            <Form onSubmit={HandleForm}>
-                <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
-                <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                <Form onSubmit={HandleForm}>
+                    <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                    <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
 
-                <Button><p>ENTRAR</p></Button>
-                <Account onClick={() => navigate('/sign-up')}>Não possuí uma conta? Cadastre-se</Account>
-            </Form>
-        </Article>
+                    <Button><p>ENTRAR</p></Button>
+                    <Account onClick={() => navigate('/sign-up')}>Não possuí uma conta? Cadastre-se</Account>
+                </Form>
+            </Article>
+        )
     }
 }
 
