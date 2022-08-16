@@ -6,18 +6,20 @@ import { useContext } from "react";
 import UserContext from "../Component/Context";
 
 export default function Home() {
-    const { bearertoken, homeinfo} = useContext(UserContext);
+    const { bearertoken, homeinfo, userinf} = useContext(UserContext);
     const navigate = useNavigate()
 
-    const user = JSON.parse(localStorage.getItem("user"))
-    const name = user.name || homeinfo.name 
-    const logoimg = user.membership.image || homeinfo.membership.image 
-    const perks = user.membership.perks || homeinfo.membership.perks
+    console.log(userinf)
+    const name =  userinf 
+    const logoimg = homeinfo.membership.image 
+    const perks = homeinfo.membership.perks
 
     function delelePLan (){
         const promise = postDelete(bearertoken);
         promise.catch(res => {console.log('error')})
-        promise.then(res => {navigate('/Subscriptions/')})
+        promise.then(res => {
+            alert('Plano cancelado! Você será redirecionado para página de novos planos!')
+            navigate('/Subscriptions/')})
     }
 
     return (
