@@ -37,7 +37,7 @@ export default function Subscriptions() {
 
     return (
         <Article>
-            <Choose>Escolha seu Plano</Choose>
+            <Choose>Escolha seu Plano:</Choose>
 
             {Array.map((value) => <PlansComponent
                 key={value.id}

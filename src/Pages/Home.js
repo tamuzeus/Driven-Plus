@@ -33,7 +33,7 @@ export default function Home() {
             </Header>
 
             <Body>
-                <Tittle>Olá, <span>{name}</span></Tittle>
+                <Tittle>Olá, <span>{name}</span>!</Tittle>
                 {perks.map((value, index) => <Button key={index}><Link href={value.link}>{value.title}</Link></Button>)}
             </Body>
 

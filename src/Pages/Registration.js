@@ -40,7 +40,7 @@ export default function Registration () {
                 <Input type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Senha" required />
 
                 <Button><p>CADASTRAR</p></Button>
-                <Account onClick={() => navigate('/')}>Já possuí conta? Entre </Account>
+                <Account onClick={() => navigate('/')}>Já possui conta? Entre </Account>
             </Form>
         </Article>
     )

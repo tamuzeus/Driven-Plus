@@ -27,11 +27,6 @@ function App() {
     const [homeinfo, setHomeinfo] = useState('');
     const [userinf, setUserinf] = useState('');
 
-    // function seeLocal() {
-    //     const lStorage = JSON.parse(localStorage.getItem("user"))
-    //     return lStorage ? lStorage : '';
-    // }
-
     return (
         <BrowserRouter>
             <Reset />

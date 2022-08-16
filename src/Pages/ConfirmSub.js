@@ -21,8 +21,6 @@ export default function ConfirmSub() {
     const [securityNumber, setSecurityNumber] = useState('')
     const [expirationDate, setExpirationDate] = useState('')
 
-    
-
     useEffect(() => {
         if (!bearertoken) { return }
         if (!value) { return }

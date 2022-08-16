@@ -33,10 +33,10 @@ export default function Modal() {
 
                 <Modalbody>
 
-                    <Modaltext><p>Tem certeza que deseja assinar o plano <span>{info.name} {info.price}</span>?</p></Modaltext>
+                    <Modaltext><p>Tem certeza que deseja assinar o plano <span>{info.name} (R$ {info.price})</span>?</p></Modaltext>
                     <Modalbuttons>
-                        <Buttonw onClick={() => {setOpenModal(!openModal)}}><p>Não</p></Buttonw>
-                        <Buttonp onClick={() => {subConfirm(); setOpenModal(!openModal)}}><p>SIM</p></Buttonp>
+                        <Buttonw onClick={() => {setOpenModal(!openModal)}}><p>Não...</p></Buttonw>
+                        <Buttonp onClick={() => {subConfirm(); setOpenModal(!openModal)}}><p>SIM!</p></Buttonp>
                     </Modalbuttons>
 
                 </Modalbody>

@@ -24,10 +24,6 @@ export default function Login() {
             alert('Email em uso ou senha inválidos!')
         })
         promise.then(res => {
-            const object = res.data
-            const seriliobject = JSON.stringify(object)
-            localStorage.setItem('user', seriliobject)
-
             const token = res.data.token
             const HeaderToken = {
                 headers: {
@@ -36,36 +32,27 @@ export default function Login() {
             }
             setBearerToken(HeaderToken)
             setUserinf(res.data.name)
-
             navigate('/Subscriptions')
         })
     }
-    const user = JSON.parse(localStorage.getItem("user"))
-    const confirmation = user && user.membership
+    return (
+        <Article>
 
-    if (confirmation) {
-        return (
-            <Home />
-        )
-    } else {
-        return (
-            <Article>
+            <ImageArea>
+                <img src={DrivenTittle} alt='' />
+            </ImageArea>
 
-                <ImageArea>
-                    <img src={DrivenTittle} alt='' />
-                </ImageArea>
+            <Form onSubmit={HandleForm}>
+                <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
 
-                <Form onSubmit={HandleForm}>
-                    <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
-                    <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
-
-                    <Button><p>ENTRAR</p></Button>
-                    <Account onClick={() => navigate('/sign-up')}>Não possuí uma conta? Cadastre-se</Account>
-                </Form>
-            </Article>
-        )
-    }
+                <Button><p>ENTRAR</p></Button>
+                <Account onClick={() => navigate('/sign-up')}>Não possui uma conta? Cadastre-se</Account>
+            </Form>
+        </Article>
+    )
 }
+
 
 const Article = styled.div`
     display: flex;
