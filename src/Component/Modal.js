@@ -7,16 +7,19 @@ import UserContext from "../Component/Context";
 import { postSubsorChange } from "../Tools/DrivenPlus";
 
 export default function Modal() {
-    const {openModal, setOpenModal, info, confirm, bearertoken, setHomeinfo } = useContext(UserContext);
+    const {openModal, setOpenModal, info, confirm } = useContext(UserContext);
 
     function subConfirm(){
-        const promise = postSubsorChange(confirm, bearertoken)
+        const promise = postSubsorChange(confirm)
         promise.catch(res => {
             alert('Houve na sua tentativa de assinatura, tente novamente!')
         })
         promise.then(res => {
-            setHomeinfo(res.data)
-            navigate('/home')
+            const Membership = res.data.membership
+            const serialMembership = JSON.stringify(Membership)
+            localStorage.setItem('membership', serialMembership)
+
+            navigate('/home')            
         })
     }
 

@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import DrivenTittle from "../Tools/Images/DrivenTittle.png";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { postLogin } from "../Tools/DrivenPlus";
-import { useContext } from "react";
-import UserContext from "../Component/Context";
+import { useState } from "react";
 
 export default function Login() {
     const navigate = useNavigate()
-    const { email, setEmail, password, setPassword, setBearerToken, setUserinf } = useContext(UserContext);
-
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     function HandleForm(e) {
         e.preventDefault()
@@ -23,33 +22,52 @@ export default function Login() {
             alert('Email em uso ou senha inválidos!')
         })
         promise.then(res => {
-            const token = res.data.token
-            const HeaderToken = {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
+
+            //salvando name
+            const Name = res.data.name
+            const serialName = JSON.stringify(Name)
+            localStorage.setItem('name', serialName)
+
+            //salvando token
+            const Token = res.data.token
+            const serialToken = JSON.stringify(Token)
+            localStorage.setItem('token', serialToken)
+
+            //salvando membership
+            const Membership = res.data.membership
+            const serialMembership = JSON.stringify(Membership)
+            localStorage.setItem('membership', serialMembership)
+
+            if (Membership) {
+                navigate('/home')
+            } else {
+                navigate('/Subscriptions')
             }
-            setBearerToken(HeaderToken)
-            setUserinf(res.data.name)
-            navigate('/Subscriptions')
         })
     }
-    return (
-        <Article>
 
-            <ImageArea>
-                <img src={DrivenTittle} alt='' />
-            </ImageArea>
+    const token = JSON.parse(localStorage.getItem('token'))
 
-            <Form onSubmit={HandleForm}>
-                <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
-                <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
-
-                <Button><p>ENTRAR</p></Button>
-                <Account onClick={() => navigate('/sign-up')}>Não possui uma conta? Cadastre-se!</Account>
-            </Form>
-        </Article>
-    )
+    if(!token){
+        return (
+            <Article>
+    
+                <ImageArea>
+                    <img src={DrivenTittle} alt='' />
+                </ImageArea>
+    
+                <Form onSubmit={HandleForm}>
+                    <Input type='email' placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                    <Input type='password' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} required />
+    
+                    <Button><p>ENTRAR</p></Button>
+                    <Account onClick={() => navigate('/sign-up')}>Não possui uma conta? Cadastre-se!</Account>
+                </Form>
+            </Article>
+        )        
+    }else{
+        return <Navigate to='/home'/>
+    }
 }
 
 

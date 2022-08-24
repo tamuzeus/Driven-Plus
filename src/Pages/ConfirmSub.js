@@ -7,12 +7,12 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../Component/Context";
-import { getPlan} from "../Tools/DrivenPlus";
+import { getPlan } from "../Tools/DrivenPlus";
 
 export default function ConfirmSub() {
 
     const navigate = useNavigate()
-    const { openModal, setOpenModal, bearertoken, info, setInfo, value, setConfirm } = useContext(UserContext);
+    const { openModal, setOpenModal, info, setInfo, value, setConfirm } = useContext(UserContext);
     const [perks, setPerks] = useState([])
 
     const [membershipId, setMembershipId] = useState('')
@@ -22,9 +22,8 @@ export default function ConfirmSub() {
     const [expirationDate, setExpirationDate] = useState('')
 
     useEffect(() => {
-        if (!bearertoken) { return }
         if (!value) { return }
-        const promise = getPlan(value, bearertoken)
+        const promise = getPlan(value)
         promise.catch(res => {
             console.log('error')
         })
@@ -33,15 +32,15 @@ export default function ConfirmSub() {
             setMembershipId(value)
             setPerks(res.data.perks)
         })
-    }, [bearertoken, value, setInfo])
+    }, [value, setInfo])
 
-    function HandleForm(e) {        
+    function HandleForm(e) {
         e.preventDefault()
 
         const creditCard = {
             membershipId, cardName, cardNumber, securityNumber, expirationDate
         }
-        
+
         setOpenModal(!openModal)
         setConfirm(creditCard)
     }
@@ -65,8 +64,8 @@ export default function ConfirmSub() {
                     </Superior>
 
                     <div>
-                        {perks.map((value, index) => 
-                            <Text key={index}><span>{index+1}.</span>{value.title}</Text>
+                        {perks.map((value, index) =>
+                            <Text key={index}><span>{index + 1}.</span>{value.title}</Text>
                         )}
                     </div>
                 </Body>
@@ -83,7 +82,7 @@ export default function ConfirmSub() {
 
             <Form onSubmit={HandleForm}>
                 <Input type='text' onChange={(e) => setCardName(e.target.value)} placeholder="Nome impresso no cartão" required />
-                <Input type='text'onChange={(e) => {setCardNumber(e.target.value)}}  placeholder="Digitos do cartão" pattern="[0-9\s]{4} [0-9\s]{4} [0-9\s]{4} [0-9\s]{4}" title="Digite os números no formato (XXXX XXXX XXXX XXXX), verifique se não possui espaços extras!" required />
+                <Input type='text' onChange={(e) => { setCardNumber(e.target.value) }} placeholder="Digitos do cartão" pattern="[0-9\s]{4} [0-9\s]{4} [0-9\s]{4} [0-9\s]{4}" title="Digite os números no formato (XXXX XXXX XXXX XXXX), verifique se não possui espaços extras!" required />
 
                 <Inferiorform>
                     <Input type='text' onChange={(e) => setSecurityNumber(e.target.value)} placeholder="Código de segurança" pattern="[0-9]{3}" title="Digite os números no formato (XXX), verifique se não possui espaços extras!" required />

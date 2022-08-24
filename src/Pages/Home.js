@@ -1,53 +1,56 @@
 import User from "../Tools/Images/User.png";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { postDelete } from "../Tools/DrivenPlus";
-import { useContext } from "react";
-import UserContext from "../Component/Context";
 
 export default function Home() {
-    const { bearertoken, homeinfo, userinf} = useContext(UserContext);
     const navigate = useNavigate()
+    
+    const name = JSON.parse(localStorage.getItem('name'))
+    const membership = JSON.parse(localStorage.getItem('membership'))
 
-    console.log(userinf)
-    const name =  userinf 
-    const logoimg = homeinfo.membership.image 
-    const perks = homeinfo.membership.perks
-
-    function delelePLan (){
-        const promise = postDelete(bearertoken);
-        promise.catch(res => {console.log('error')})
+    function delelePLan() {
+        const promise = postDelete();
+        promise.catch(res => { console.log('error') })
         promise.then(res => {
             alert('Plano cancelado! Você será redirecionado para página de novos planos!')
-            navigate('/Subscriptions/')})
+            navigate('/Subscriptions/')
+        })
     }
 
-    return (
-        <Article>
-            <Header>
-                <IconBody>
-                    <img src={logoimg} alt=''></img>
-                </IconBody>
+    if (membership) {
 
-                <UserIconBody>
-                    <img src={User} alt=''></img>
-                </UserIconBody>
-            </Header>
+        const logoimg = membership.image
+        const perks = membership.perks
 
-            <Body>
-                <Tittle>Olá, <span>{name}</span>!</Tittle>
-                {perks.map((value, index) => <Button key={index}><Link href={value.link}>{value.title}</Link></Button>)}
-            </Body>
+        return (
+            <Article>
+                <Header>
+                    <IconBody>
+                        <img src={logoimg} alt=''></img>
+                    </IconBody>
 
-            <Footer>
-                <Button onClick={() => navigate('/Subscriptions/')}><p>Mudar plano</p></Button>
-                <Buttonr onClick={() => { delelePLan()}}><p>cancelar plano</p></Buttonr>
-            </Footer>
+                    <UserIconBody>
+                        <img src={User} alt=''></img>
+                    </UserIconBody>
+                </Header>
 
-        </Article>
-    )
+                <Body>
+                    <Tittle>Olá, <span>{name}</span>!</Tittle>
+                    {perks.map((value, index) => <Button key={index}><Link href={value.link}>{value.title}</Link></Button>)}
+                </Body>
 
-}
+                <Footer>
+                    <Button onClick={() => navigate('/Subscriptions/')}><p>Mudar plano</p></Button>
+                    <Buttonr onClick={() => { delelePLan() }}><p>cancelar plano</p></Buttonr>
+                </Footer>
+
+            </Article>
+        )
+    }else{
+        return <Navigate to='/Subscriptions'/>
+    }
+}   
 
 const Link = styled.a`
     color: white;

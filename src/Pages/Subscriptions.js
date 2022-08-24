@@ -2,18 +2,18 @@ import { getPlans } from "../Tools/DrivenPlus";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../Component/Context";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function PlansComponent({ src, price, id }) {
     const navigate = useNavigate()
-    const {setValue} = useContext(UserContext);
+    const { setValue } = useContext(UserContext);
 
     return (
         <PlanBody value={id} onClick={() => {
-            navigate(`/subscriptions/${id}`)
+            navigate(`/Subscriptions/${id}`)
             setValue(id)
         }}>
-            <LogoBody><img src={src} alt=''/></LogoBody>
+            <LogoBody><img src={src} alt='' /></LogoBody>
             <Price>{price}</Price>
         </PlanBody>
     )
@@ -21,31 +21,29 @@ function PlansComponent({ src, price, id }) {
 
 export default function Subscriptions() {
 
-    const { bearertoken } = useContext(UserContext);
     const [Array, setArray] = useState([])
 
     useEffect(() => {
-        if(!bearertoken){return}
-        const promise = getPlans(bearertoken)
+        const promise = getPlans()
         promise.catch(res => {
             console.log('error')
         })
         promise.then(res => {
             setArray(res.data)
         })
-    }, [bearertoken])
+    }, [])
 
     return (
         <Article>
             <Choose>Escolha seu Plano:</Choose>
 
-            {Array.map((value) => <PlansComponent
-                key={value.id}
-                id={value.id}
-                src={value.image}
-                price={value.price}
-            />)}
-
+            {Array.map((value) =>
+                <PlansComponent
+                    key={value.id}
+                    id={value.id}
+                    src={value.image}
+                    price={value.price}
+                />)}
         </Article>
     )
 
